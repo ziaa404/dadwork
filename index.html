@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع مدرس اللغة العربية</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            margin: 0 5px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+        
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        .btn-success {
+            background: linear-gradient(45deg, #27ae60, #229954);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .lesson-item,
+        .student-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-right: 4px solid #3498db;
+        }
+        
+        .grade-input {
+            width: 80px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            transition: width 0.3s ease;
+        }
+        
+        .delete-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            float: left;
+        }
+        
+        .edit-btn {
+            background: #f39c12;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 5px;
+            float: left;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                margin: 2px 0;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 موقع مدرس اللغة العربية</h1>
+            <p>إدارة شاملة للدروس والطلاب وتقييم المهارات</p>
+        </div>
+        
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">لوحة التحكم</button>
+            <button class="nav-tab" onclick="showTab('lessons')">تحضير الدروس</button>
+            <button class="nav-tab" onclick="showTab('students')">إدارة الطلاب</button>
+            <button class="nav-tab" onclick="showTab('grades')">الدرجات والتقييم</button>
+            <button class="nav-tab" onclick="showTab('reports')">التقارير</button>
+        </div>
+        
+        <!-- لوحة التحكم -->
+        <div id="dashboard" class="tab-content active">
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalStudents">0</div>
+                    <div class="stat-label">إجمالي الطلاب</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalLessons">0</div>
+                    <div class="stat-label">الدروس المحضرة</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="averageGrade">0</div>
+                    <div class="stat-label">متوسط الدرجات</div>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>📚 آخر الدروس المضافة</h3>
+                    <div id="recentLessons">لا توجد دروس بعد</div>
+                </div>
+                <div class="card">
+                    <h3>👥 الطلاب الأكثر تميزاً</h3>
+                    <div id="topStudents">لا توجد بيانات بعد</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- تحضير الدروس -->
+        <div id="lessons" class="tab-content">
+            <h2>📖 تحضير الدروس</h2>
+            
+            <div class="form-group">
+                <label>عنوان الدرس:</label>
+                <input type="text" id="lessonTitle" placeholder="مثال: النحو - إعراب الفعل المضارع">
+            </div>
+            
+            <div class="form-group">
+                <label>الصف الدراسي:</label>
+                <select id="lessonGrade">
+                    <option value="">اختر الصف</option>
+                    <option value="الأول الابتدائي">الأول الابتدائي</option>
+                    <option value="الثاني الابتدائي">الثاني الابتدائي</option>
+                    <option value="الثالث الابتدائي">الثالث الابتدائي</option>
+                    <option value="الرابع الابتدائي">الرابع الابتدائي</option>
+                    <option value="الخامس الابتدائي">الخامس الابتدائي</option>
+                    <option value="السادس الابتدائي">السادس الابتدائي</option>
+                    <option value="الأول الإعدادي">الأول الإعدادي</option>
+                    <option value="الثاني الإعدادي">الثاني الإعدادي</option>
+                    <option value="الثالث الإعدادي">الثالث الإعدادي</option>
+                    <option value="الأول الثانوي">الأول الثانوي</option>
+                    <option value="الثاني الثانوي">الثاني الثانوي</option>
+                    <option value="الثالث الثانوي">الثالث الثانوي</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>أهداف الدرس:</label>
+                <textarea id="lessonObjectives" rows="3" placeholder="أهداف الدرس التي يجب تحقيقها..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>محتوى الدرس:</label>
+                <textarea id="lessonContent" rows="6" placeholder="شرح مفصل لمحتوى الدرس..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>الأنشطة والتمارين:</label>
+                <textarea id="lessonActivities" rows="4" placeholder="الأنشطة والتمارين المطلوبة..."></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label>الواجب المنزلي:</label>
+                <textarea id="lessonHomework" rows="3" placeholder="الواجب المطلوب من الطلاب..."></textarea>
+            </div>
+            
+            <button class="btn" onclick="saveLesson()">💾 حفظ الدرس</button>
+            
+            <div id="lessonsList" class="grid"></div>
+        </div>
+        
+        <!-- إدارة الطلاب -->
+        <div id="students" class="tab-content">
+            <h2>👥 إدارة الطلاب</h2>
+            
+            <div class="form-group">
+                <label>اسم الطالب:</label>
+                <input type="text" id="studentName" placeholder="اسم الطالب الكامل">
+            </div>
+            
+            <div class="form-group">
+                <label>الصف الدراسي:</label>
+                <select id="studentGrade">
+                    <option value="">اختر الصف</option>
+                    <option value="الأول الابتدائي">الأول الابتدائي</option>
+                    <option value="الثاني الابتدائي">الثاني الابتدائي</option>
+                    <option value="الثالث الابتدائي">الثالث الابتدائي</option>
+                    <option value="الرابع الابتدائي">الرابع الابتدائي</option>
+                    <option value="الخامس الابتدائي">الخامس الابتدائي</option>
+                    <option value="السادس الابتدائي">السادس الابتدائي</option>
+                    <option value="الأول الإعدادي">الأول الإعدادي</option>
+                    <option value="الثاني الإعدادي">الثاني الإعدادي</option>
+                    <option value="الثالث الإعدادي">الثالث الإعدادي</option>
+                    <option value="الأول الثانوي">الأول الثانوي</option>
+                    <option value="الثاني الثانوي">الثاني الثانوي</option>
+                    <option value="الثالث الثانوي">الثالث الثانوي</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>رقم الهاتف (ولي الأمر):</label>
+                <input type="tel" id="studentPhone" placeholder="01xxxxxxxxx">
+            </div>
+            
+            <div class="form-group">
+                <label>ملاحظات:</label>
+                <textarea id="studentNotes" rows="3" placeholder="ملاحظات حول الطالب..."></textarea>
+            </div>
+            
+            <button class="btn" onclick="addStudent()">➕ إضافة طالب</button>
+            
+            <div id="studentsList"></div>
+        </div>
+        
+        <!-- الدرجات والتقييم -->
+        <div id="grades" class="tab-content">
+            <h2>📊 الدرجات والتقييم</h2>
+            
+            <div class="form-group">
+                <label>نوع التقييم:</label>
+                <select id="gradeType">
+                    <option value="امتحان شهري">امتحان شهري</option>
+                    <option value="امتحان نصف الفصل">امتحان نصف الفصل</option>
+                    <option value="امتحان آخر العام">امتحان آخر العام</option>
+                    <option value="واجب منزلي">واجب منزلي</option>
+                    <option value="مشاركة صفية">مشاركة صفية</option>
+                    <option value="مشروع">مشروع</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>الدرجة الكاملة:</label>
+                <input type="number" id="fullGrade" value="20" min="1" max="100">
+            </div>
+            
+            <div id="gradesList"></div>
+            
+            <h3>🎯 تقييم المهارات</h3>
+            <div class="form-group">
+                <label>المهارة:</label>
+                <select id="skillType">
+                    <option value="القراءة">القراءة</option>
+                    <option value="الكتابة">الكتابة</option>
+                    <option value="الإملاء">الإملاء</option>
+                    <option value="النحو">النحو</option>
+                    <option value="الصرف">الصرف</option>
+                    <option value="البلاغة">البلاغة</option>
+                    <option value="الأدب">الأدب</option>
+                    <option value="التعبير">التعبير</option>
+                </select>
+            </div>
+            
+            <div id="skillsAssessment"></div>
+        </div>
+        
+        <!-- التقارير -->
+        <div id="reports" class="tab-content">
+            <h2>📈 التقارير والإحصائيات</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>📊 إحصائيات الدرجات</h3>
+                    <button class="btn" onclick="generateGradeReport()">إنشاء تقرير الدرجات</button>
+                    <div id="gradeReport"></div>
+                </div>
+                
+                <div class="card">
+                    <h3>🎯 تقرير المهارات</h3>
+                    <button class="btn" onclick="generateSkillReport()">إنشاء تقرير المهارات</button>
+                    <div id="skillReport"></div>
+                </div>
+                
+                <div class="card">
+                    <h3>👥 تقرير الطلاب</h3>
+                    <button class="btn" onclick="generateStudentReport()">إنشاء تقرير الطلاب</button>
+                    <div id="studentReport"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="notification" class="notification"></div>
+    
+    <script>
+        // متغيرات لتخزين البيانات
+        let lessons = [];
+        let students = [];
+        let grades = [];
+        let skills = [];
+        
+        // تحميل البيانات عند بدء الصفحة
+        window.onload = function() {
+            loadData();
+            updateDashboard();
+            displayStudentsForGrades();
+            displayStudentsForSkills();
+        };
+        
+        // وظائف إدارة التبويبات
+        function showTab(tabName) {
+            // إخفاء جميع التبويبات
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // إخفاء جميع أزرار التبويبات
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach(tab => tab.classList.remove('active'));
+            
+            // إظهار التبويب المحدد
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            // تحديث البيانات حسب التبويب
+            if (tabName === 'dashboard') {
+                updateDashboard();
+            } else if (tabName === 'grades') {
+                displayStudentsForGrades();
+            } else if (tabName === 'lessons') {
+                displayLessons();
+            } else if (tabName === 'students') {
+                displayStudents();
+            }
+        }
+        
+        // حفظ البيانات في المتصفح
+        function saveData() {
+            const data = {
+                lessons: lessons,
+                students: students,
+                grades: grades,
+                skills: skills
+            };
+            // استخدام متغير عام بدلاً من localStorage
+            window.appData = data;
+        }
+        
+        // تحميل البيانات من المتصفح
+        function loadData() {
+            if (window.appData) {
+                const data = window.appData;
+                lessons = data.lessons || [];
+                students = data.students || [];
+                grades = data.grades || [];
+                skills = data.skills || [];
+            }
+        }
+        
+        // إظهار الإشعارات
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // حفظ درس جديد
+        function saveLesson() {
+            const title = document.getElementById('lessonTitle').value;
+            const grade = document.getElementById('lessonGrade').value;
+            const objectives = document.getElementById('lessonObjectives').value;
+            const content = document.getElementById('lessonContent').value;
+            const activities = document.getElementById('lessonActivities').value;
+            const homework = document.getElementById('lessonHomework').value;
+            
+            if (!title || !grade || !content) {
+                showNotification('يرجى ملء جميع الحقول المطلوبة', 'error');
+                return;
+            }
+            
+            const lesson = {
+                id: Date.now(),
+                title,
+                grade,
+                objectives,
+                content,
+                activities,
+                homework,
+                date: new Date().toLocaleDateString('ar-EG')
+            };
+            
+            lessons.push(lesson);
+            saveData();
+            
+            // مسح النموذج
+            document.getElementById('lessonTitle').value = '';
+            document.getElementById('lessonGrade').value = '';
+            document.getElementById('lessonObjectives').value = '';
+            document.getElementById('lessonContent').value = '';
+            document.getElementById('lessonActivities').value = '';
+            document.getElementById('lessonHomework').value = '';
+            
+            displayLessons();
+            showNotification('تم حفظ الدرس بنجاح!');
+        }
+        
+        // عرض الدروس
+        function displayLessons() {
+            const lessonsList = document.getElementById('lessonsList');
+            lessonsList.innerHTML = '';
+            
+            lessons.forEach(lesson => {
+                const lessonDiv = document.createElement('div');
+                lessonDiv.className = 'card';
+                lessonDiv.innerHTML = `
+                    <h3>${lesson.title}</h3>
+                    <p><strong>الصف:</strong> ${lesson.grade}</p>
+                    <p><strong>التاريخ:</strong> ${lesson.date}</p>
+                    <p><strong>الأهداف:</strong> ${lesson.objectives}</p>
+                    <p><strong>المحتوى:</strong> ${lesson.content.substring(0, 100)}...</p>
+                    <button class="delete-btn" onclick="deleteLesson(${lesson.id})">حذف</button>
+                    <button class="edit-btn" onclick="editLesson(${lesson.id})">تعديل</button>
+                `;
+                lessonsList.appendChild(lessonDiv);
+            });
+        }
+        
+        // حذف درس
+        function deleteLesson(id) {
+            if (confirm('هل أنت متأكد من حذف هذا الدرس؟')) {
+                lessons = lessons.filter(lesson => lesson.id !== id);
+                saveData();
+                displayLessons();
+                showNotification('تم حذف الدرس بنجاح!');
+            }
+        }
+        
+        // إضافة طالب جديد
+        function addStudent() {
+            const name = document.getElementById('studentName').value;
+            const grade = document.getElementById('studentGrade').value;
+            const phone = document.getElementById('studentPhone').value;
+            const notes = document.getElementById('studentNotes').value;
+            
+            if (!name || !grade) {
+                showNotification('يرجى ملء الاسم والصف على الأقل', 'error');
+                return;
+            }
+            
+            const student = {
+                id: Date.now(),
+                name,
+                grade,
+                phone,
+                notes,
+                joinDate: new Date().toLocaleDateString('ar-EG')
+            };
+            
+            students.push(student);
+            saveData();
+            
+            // مسح النموذج
+            document.getElementById('studentName').value = '';
+            document.getElementById('studentGrade').value = '';
+            document.getElementById('studentPhone').value = '';
+            document.getElementById('studentNotes').value = '';
+            
+            displayStudents();
+            displayStudentsForGrades();
+            displayStudentsForSkills();
+            showNotification('تم إضافة الطالب بنجاح!');
+        }
+        
+        // عرض الطلاب
+        function displayStudents() {
+            const studentsList = document.getElementById('studentsList');
+            studentsList.innerHTML = '';
+            
+            students.forEach(student => {
+                const studentDiv = document.createElement('div');
+                studentDiv.className = 'student-item';
+                studentDiv.innerHTML = `
+                    <h4>${student.name}</h4>
+                    <p><strong>الصف:</strong> ${student.grade}</p>
+                    <p><strong>الهاتف:</strong> ${student.phone}</p>
+                    <p><strong>تاريخ التسجيل:</strong> ${student.joinDate}</p>
+                    <p><strong>ملاحظات:</strong> ${student.notes}</p>
+                    <button class="delete-btn" onclick="deleteStudent(${student.id})">حذف</button>
+                `;
+                studentsList.appendChild(studentDiv);
+            });
+        }
+        
+        // حذف طالب
+        function deleteStudent(id) {
+            if (confirm('هل أنت متأكد من حذف هذا الطالب؟')) {
+                students = students.filter(student => student.id !== id);
+                grades = grades.filter(grade => grade.studentId !== id);
+                skills = skills.filter(skill => skill.studentId !== id);
+                saveData();
+                displayStudents();
+                displayStudentsForGrades();
+                displayStudentsForSkills();
+                showNotification('تم حذف الطالب بنجاح!');
+            }
+        }
+        
+        // عرض الطلاب لإدخال الدرجات
+        function displayStudentsForGrades() {
+            const gradesList = document.getElementById('gradesList');
+            gradesList.innerHTML = '';
+            
+            students.forEach(student => {
+                const gradeDiv = document.createElement('div');
+                gradeDiv.className = 'student-item';
+                gradeDiv.innerHTML = `
+                    <h4>${student.name} - ${student.grade}</h4>
+                    <input type="number" class="grade-input" id="grade_${student.id}" 
+                           placeholder="الدرجة" min="0" max="100">
+                    <button class="btn" onclick="saveGrade(${student.id})">حفظ الدرجة</button>
+                    <div id="grades_${student.id}"></div>
+                `;
+                gradesList.appendChild(gradeDiv);
+                displayStudentGrades(student.id);
+            });
+        }
+        
+        // حفظ درجة طالب
+        function saveGrade(studentId) {
+            const gradeInput = document.getElementById(`grade_${studentId}`);
+            const gradeValue = parseFloat(gradeInput.value);
+            const gradeType = document.getElementById('gradeType').value;
+            const fullGrade = parseFloat(document.getElementById('fullGrade').value);
+            
+            if (isNaN(gradeValue) || gradeValue < 0) {
+                showNotification('يرجى إدخال درجة صحيحة', 'error');
+                return;
+            }
+            
+            if (gradeValue > fullGrade) {
+                showNotification(`الدرجة لا يمكن أن تتجاوز ${fullGrade}`, 'error');
+                return;
+            }
+            
+            const grade = {
+                id: Date.now(),
+                studentId,
+                type: gradeType,
+                grade: gradeValue,
+                fullGrade,
+                percentage: (gradeValue / fullGrade) * 100,
+                date: new Date().toLocaleDateString('ar-EG')
+            };
+            
+            grades.push(grade);
+            saveData();
+            gradeInput.value = '';
+            displayStudentGrades(studentId);
+            updateDashboard();
+            showNotification('تم حفظ الدرجة بنجاح!');
+        }
+        
+        // عرض درجات الطالب
+        function displayStudentGrades(studentId) {
+            const gradesDiv = document.getElementById(`grades_${studentId}`);
+            const studentGrades = grades.filter(grade => grade.studentId === studentId);
+            
+            gradesDiv.innerHTML = '';
+            studentGrades.forEach(grade => {
+                const gradeItem = document.createElement('div');
+                gradeItem.innerHTML = `
+                    <small>${grade.type}: ${grade.grade}/${grade.fullGrade} (${grade.percentage.toFixed(1)}%) - ${grade.date}</small>
+                    <button class="delete-btn" style="font-size: 10px; padding: 2px 5px;" onclick="deleteGrade(${grade.id})">×</button>
+                `;
+                gradesDiv.appendChild(gradeItem);
+            });
+        }
+        
+        // حذف درجة
+        function deleteGrade(id) {
+            if (confirm('هل أنت متأكد من حذف هذه الدرجة؟')) {
+                grades = grades.filter(grade => grade.id !== id);
+                saveData();
+                displayStudentsForGrades();
+                updateDashboard();
+                showNotification('تم حذف الدرجة بنجاح!');
+            }
+        }
+        
+        // عرض الطلاب لتقييم المهارات
+        function displayStudentsForSkills() {
+            const skillsAssessment = document.getElementById('skillsAssessment');
+            skillsAssessment.innerHTML = '';
+            
+            students.forEach(student => {
+                const skillDiv = document.createElement('div');
+                skillDiv.className = 'student-item';
+                skillDiv.innerHTML = `
+                    <h4>${student.name} - ${student.grade}</h4>
+                    <label>مستوى المهارة (1-5):</label>
+                    <select id="skill_level_${student.id}">
+                        <option value="1">1 - ضعيف جداً</option>
+                        <option value="2">2 - ضعيف</option>
+                        <option value="3" selected>3 - متوسط</option>
+                        <option value="4">4 - جيد</option>
+                        <option value="5">5 - ممتاز</option>
+                    </select>
+                    <textarea id="skill_notes_${student.id}" placeholder="ملاحظات حول أداء الطالب في هذه المهارة..."></textarea>
+                    <button class="btn" onclick="saveSkillAssessment(${student.id})">حفظ التقييم</button>
+                    <div id="skills_${student.id}"></div>
+                `;
+                skillsAssessment.appendChild(skillDiv);
+                displayStudentSkills(student.id);
+            });
+        }
+        
+        // حفظ تقييم المهارة
+        function saveSkillAssessment(studentId) {
+            const skillType = document.getElementById('skillType').value;
+            const skillLevel = parseInt(document.getElementById(`skill_level_${studentId}`).value);
+            const skillNotes = document.getElementById(`skill_notes_${studentId}`).value;
+            
+            const skill = {
+                id: Date.now(),
+                studentId,
+                type: skillType,
+                level: skillLevel,
+                notes: skillNotes,
+                date: new Date().toLocaleDateString('ar-EG')
+            };
+            
+            skills.push(skill);
+            saveData();
+            
+            document.getElementById(`skill_notes_${studentId}`).value = '';
+            displayStudentSkills(studentId);
+            showNotification('تم حفظ تقييم المهارة بنجاح!');
+        }
+        
+        // عرض مهارات الطالب
+        function displayStudentSkills(studentId) {
+            const skillsDiv = document.getElementById(`skills_${studentId}`);
+            const studentSkills = skills.filter(skill => skill.studentId === studentId);
+            
+            skillsDiv.innerHTML = '';
+            studentSkills.forEach(skill => {
+                const skillItem = document.createElement('div');
+                const levelText = ['', 'ضعيف جداً', 'ضعيف', 'متوسط', 'جيد', 'ممتاز'][skill.level];
+                skillItem.innerHTML = `
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${(skill.level / 5) * 100}%"></div>
+                    </div>
+                    <small>${skill.type}: ${levelText} (${skill.level}/5) - ${skill.date}</small>
+                    <button class="delete-btn" style="font-size: 10px; padding: 2px 5px;" onclick="deleteSkill(${skill.id})">×</button>
+                    ${skill.notes ? `<p><small>${skill.notes}</small></p>` : ''}
+                `;
+                skillsDiv.appendChild(skillItem);
+            });
+        }
+        
+        // حذف تقييم مهارة
+        function deleteSkill(id) {
+            if (confirm('هل أنت متأكد من حذف هذا التقييم؟')) {
+                skills = skills.filter(skill => skill.id !== id);
+                saveData();
+                displayStudentsForSkills();
+                showNotification('تم حذف التقييم بنجاح!');
+            }
+        }
+        
+        // تحديث لوحة التحكم
+        function updateDashboard() {
+            document.getElementById('totalStudents').textContent = students.length;
+            document.getElementById('totalLessons').textContent = lessons.length;
+            
+            // حساب متوسط الدرجات
+            if (grades.length > 0) {
+                const average = grades.reduce((sum, grade) => sum + grade.percentage, 0) / grades.length;
+                document.getElementById('averageGrade').textContent = average.toFixed(1) + '%';
+            } else {
+                document.getElementById('averageGrade').textContent = '0%';
+            }
+            
+            // عرض آخر الدروس
+            const recentLessons = document.getElementById('recentLessons');
+            const lastLessons = lessons.slice(-3).reverse();
+            recentLessons.innerHTML = '';
+            
+            if (lastLessons.length > 0) {
+                lastLessons.forEach(lesson => {
+                    const lessonItem = document.createElement('div');
+                    lessonItem.innerHTML = `<p><strong>${lesson.title}</strong> - ${lesson.grade}</p>`;
+                    recentLessons.appendChild(lessonItem);
+                });
+            } else {
+                recentLessons.innerHTML = '<p>لا توجد دروس بعد</p>';
+            }
+            
+            // عرض أفضل الطلاب
+            const topStudents = document.getElementById('topStudents');
+            const studentAverages = [];
+            
+            students.forEach(student => {
+                const studentGrades = grades.filter(grade => grade.studentId === student.id);
+                if (studentGrades.length > 0) {
+                    const average = studentGrades.reduce((sum, grade) => sum + grade.percentage, 0) / studentGrades.length;
+                    studentAverages.push({ name: student.name, average });
+                }
+            });
+            
+            studentAverages.sort((a, b) => b.average - a.average);
+            topStudents.innerHTML = '';
+            
+            if (studentAverages.length > 0) {
+                studentAverages.slice(0, 3).forEach(student => {
+                    const studentItem = document.createElement('div');
+                    studentItem.innerHTML = `<p><strong>${student.name}</strong>: ${student.average.toFixed(1)}%</p>`;
+                    topStudents.appendChild(studentItem);
+                });
+            } else {
+                topStudents.innerHTML = '<p>لا توجد بيانات بعد</p>';
+            }
+        }
+        
+        // إنشاء تقرير الدرجات
+        function generateGradeReport() {
+            const gradeReport = document.getElementById('gradeReport');
+            
+            if (grades.length === 0) {
+                gradeReport.innerHTML = '<p>لا توجد درجات لإنشاء التقرير</p>';
+                return;
+            }
+            
+            const gradesByType = {};
+            grades.forEach(grade => {
+                if (!gradesByType[grade.type]) {
+                    gradesByType[grade.type] = [];
+                }
+                gradesByType[grade.type].push(grade.percentage);
+            });
+            
+            let reportHTML = '<h4>تقرير الدرجات حسب نوع التقييم:</h4>';
+            
+            Object.keys(gradesByType).forEach(type => {
+                const typeGrades = gradesByType[type];
+                const average = typeGrades.reduce((sum, grade) => sum + grade, 0) / typeGrades.length;
+                const highest = Math.max(...typeGrades);
+                const lowest = Math.min(...typeGrades);
+                
+                reportHTML += `
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <h5>${type}</h5>
+                        <p>متوسط الدرجات: ${average.toFixed(1)}%</p>
+                        <p>أعلى درجة: ${highest.toFixed(1)}%</p>
+                        <p>أقل درجة: ${lowest.toFixed(1)}%</p>
+                        <p>عدد التقييمات: ${typeGrades.length}</p>
+                    </div>
+                `;
+            });
+            
+            gradeReport.innerHTML = reportHTML;
+        }
+        
+        // إنشاء تقرير المهارات
+        function generateSkillReport() {
+            const skillReport = document.getElementById('skillReport');
+            
+            if (skills.length === 0) {
+                skillReport.innerHTML = '<p>لا توجد تقييمات مهارات لإنشاء التقرير</p>';
+                return;
+            }
+            
+            const skillsByType = {};
+            skills.forEach(skill => {
+                if (!skillsByType[skill.type]) {
+                    skillsByType[skill.type] = [];
+                }
+                skillsByType[skill.type].push(skill.level);
+            });
+            
+            let reportHTML = '<h4>تقرير المهارات حسب النوع:</h4>';
+            
+            Object.keys(skillsByType).forEach(type => {
+                const typeSkills = skillsByType[type];
+                const average = typeSkills.reduce((sum, skill) => sum + skill, 0) / typeSkills.length;
+                const excellent = typeSkills.filter(skill => skill >= 4).length;
+                const needsImprovement = typeSkills.filter(skill => skill <= 2).length;
+                
+                reportHTML += `
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <h5>${type}</h5>
+                        <p>متوسط المستوى: ${average.toFixed(1)}/5</p>
+                        <p>طلاب متميزون (4-5): ${excellent}</p>
+                        <p>طلاب يحتاجون تحسين (1-2): ${needsImprovement}</p>
+                        <p>إجمالي التقييمات: ${typeSkills.length}</p>
+                    </div>
+                `;
+            });
+            
+            skillReport.innerHTML = reportHTML;
+        }
+        
+        // إنشاء تقرير الطلاب
+        function generateStudentReport() {
+            const studentReport = document.getElementById('studentReport');
+            
+            if (students.length === 0) {
+                studentReport.innerHTML = '<p>لا يوجد طلاب لإنشاء التقرير</p>';
+                return;
+            }
+            
+            const gradeDistribution = {};
+            students.forEach(student => {
+                if (!gradeDistribution[student.grade]) {
+                    gradeDistribution[student.grade] = 0;
+                }
+                gradeDistribution[student.grade]++;
+            });
+            
+            let reportHTML = '<h4>توزيع الطلاب حسب الصفوف:</h4>';
+            
+            Object.keys(gradeDistribution).forEach(grade => {
+                const count = gradeDistribution[grade];
+                const percentage = ((count / students.length) * 100).toFixed(1);
+                
+                reportHTML += `
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <h5>${grade}</h5>
+                        <p>عدد الطلاب: ${count}</p>
+                        <p>النسبة: ${percentage}%</p>
+                    </div>
+                `;
+            });
+            
+            reportHTML += `<h4>إحصائيات عامة:</h4>
+                          <p>إجمالي الطلاب: ${students.length}</p>
+                          <p>إجمالي التقييمات: ${grades.length}</p>
+                          <p>إجمالي تقييمات المهارات: ${skills.length}</p>`;
+            
+            studentReport.innerHTML = reportHTML;
+        }
+    </script>
+</body>
+</html>
